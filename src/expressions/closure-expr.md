@@ -6,16 +6,22 @@
 > &nbsp;&nbsp; ( `||` | `|` [_FunctionParameters_]<sup>?</sup> `|` )  
 > &nbsp;&nbsp; ([_Expression_] | `->` [_TypeNoBounds_]&nbsp;[_BlockExpression_])  
 
-A _closure expression_ defines a closure and denotes it as a value, in a single
-expression. A closure expression is a pipe-symbol-delimited (`|`) list of
-patterns followed by an expression. Type annotations may optionally be added
-for the type of the parameters or for the return type. If there is a return
-type, the expression used for the body of the closure must be a normal
-[block]. A closure expression also may begin with the
-`move` keyword before the initial `|`.
+A _closure expression_ defines a _closure_, an anonymous function, and denotes
+it as a value in a single expression. Closure expressions are most useful when
+passing functions as arguments to other functions; they are shorter than
+a function item definition and, unlike function items, they can refer to local
+variables from their enclosing scope.
 
-A closure expression denotes a function that maps a list of parameters
-(`ident_list`) onto the expression that follows the `ident_list`. The patterns
+A closure expression is a pipe-symbol-delimited (`|`) list of irrefutable
+patterns (the parameters) followed by an expression, and optionally preceded by
+the keyword `move`. Type annotations are optional for the parameters, and a
+return type may be optionally specified. If there is a return type specified, the
+expression used for the body of the closure must be a normal [block], otherwise
+it may be any expression. If a parameter type or return type is omitted, it is
+inferred by the compiler.
+
+A closure expression denotes a function whose 
+onto the expression that follows. The patterns
 in the `ident_list` are the parameters to the closure. If a parameter's types
 is not specified, then the compiler infers it from context. Each closure
 expression has a unique anonymous type.
